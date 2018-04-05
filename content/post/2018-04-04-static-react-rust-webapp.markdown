@@ -10,24 +10,34 @@ categories:
 - Tutorial
 comments: false
 date: 2018-04-04T21:21:00Z
-title: Making a 100% Statically-Linked Single-File Web App with React and Rust
+title: Making a 100% Statically-Linked, Single-File Web App with React and Rust
 url: /2018/04/04/static-react-rust-webapp/
 ---
 
+You think your site made with the [latest fancy static site generator](https://www.staticgen.com/)
+is static? I'll show you what static is.
+
 This tutorial will cover the basics of creating a minimal React app which can
-be deployed as a statically-linked Rust binary.
+be deployed as a statically-linked Rust binary. What this accomplishes is
+having all of your code, including HTML, JavaScript, CSS, and Rust, packaged
+into a single file that will run on pretty much any 64-bit Linux system,
+regardless of the kernel version or installed libraries.
+
+Complete source is available on [GitHub](https://github.com/anderspitman/react_rust_webapp).
 
 # Why?
 
-* Simpler deployment. Having a static binary means you just have to copy the
+* **Simpler deployment:** Having a static binary means you just have to copy the
   file to your servers and run it.
-* Cross platform GUI apps. One of the biggest challenges in creating
-  cross-platform GUI app is working with a GUI library that targets all the
+* **Cross-platform native GUI apps:** One of the biggest challenges in creating
+  a cross-platform GUI app is working with a GUI library that targets all the
   platforms you're interested in. The approach here lets you leverage the
   user's browser for this purpose. This is somewhat similar to what
   [Electron](https://electronjs.org/) accomplishes, but your backend is in
   Rust rather than JavaScript, and the user navigates to the app from their
-  browser.
+  browser. There are certainly tradeoffs here, but it can work well for some
+  apps. I was first introduced to this approach by [syncthing](https://syncthing.net/),
+  which is written in go but does a similar thing.
 * Because I've been obsessed with static linking for as long as I can
   remember and I'm not really sure why.
 
@@ -203,8 +213,6 @@ available as a normal variable.
 The rouille code just sets up two HTTP endpoints, "/" and "/bundle.js".
 Instead of returning the files from the filesystem as we'd typically do with
 a web app, we're returning the contents of the statics strings from the binary.
-I was first introduced to this pattern by [syncthing](https://syncthing.net/),
-which is written in go but does a similar thing.
 
 To learn more about using Rouille to do more advanced stuff refer to their
 docs.
@@ -260,3 +268,6 @@ This is just the basics. There's a lot more you could do with this, including:
 * Take the port number from the command line
 * Serialized (probably JSON) requests and responses
 * Run webpack as an npm script command
+* Target other OSes. I haven't tried yet, but this should be easily transerable
+  to MacOS and Windows, thanks to the awesomeness that is Rust/Cargo and the
+  universal availability of web browsers.
