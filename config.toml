@@ -1,5 +1,5 @@
-#baseurl = "https://anderspitman.net/"
-baseurl = "https://anderspitman.github.io"
+baseurl = "https://anderspitman.net/"
+#baseurl = "https://anderspitman.github.io"
 languageCode = "en-us"
 title = "Anders Pitman's blog"
 # Define how many pages appear per site

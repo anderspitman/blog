@@ -14,9 +14,6 @@ title: Making a 100% Statically-Linked, Single-File Web App with React and Rust
 url: /2018/04/04/static-react-rust-webapp/
 ---
 
-You think your site made with the [latest fancy static site generator](https://www.staticgen.com/)
-is static? I'll show you what static is.
-
 This tutorial will cover the basics of creating a minimal React app which can
 be deployed as a statically-linked Rust binary. What this accomplishes is
 having all of your code, including HTML, JavaScript, CSS, and Rust, packaged
@@ -88,7 +85,7 @@ Put the following content in `dist/index.html`:
   </head>
   <body>
     <div id="root"></div>
-    <script src="/main.js"></script>
+    <script src="/bundle.js"></script>
   </body>
 </html>
 ```
@@ -268,6 +265,6 @@ This is just the basics. There's a lot more you could do with this, including:
 * Take the port number from the command line
 * Serialized (probably JSON) requests and responses
 * Run webpack as an npm script command
-* Target other OSes. I haven't tried yet, but this should be easily transerable
+* Target other OSes. I haven't tried yet, but this should be mostly transferable
   to MacOS and Windows, thanks to the awesomeness that is Rust/Cargo and the
   universal availability of web browsers.
