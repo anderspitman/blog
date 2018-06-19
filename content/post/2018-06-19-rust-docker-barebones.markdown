@@ -22,6 +22,10 @@ on this topic. This can be seen as a micro-tutorial
 to get the most basic version working. I highly recommend checking out the
 other resources to get something actually useful up and running.
 
+Full source code for this post is available
+[on GitHub](https://github.com/anderspitman/rust_docker_barebones).
+As you can see, there's not much to it.
+
 # Prerequisites
 
 * [rustup](https://rustup.rs/),
@@ -31,7 +35,9 @@ other resources to get something actually useful up and running.
   instructions and it will
   download and install the other two for you.
 * [musl libc](https://www.musl-libc.org/)
-  on your system with the musl-gcc command is on your PATH
+  on your system with the musl-gcc command is on your PATH. musl is a
+  lightweight libc implementation that works well for static linking. It is
+  supported by Rust.
 * [Docker installation](https://docs.docker.com/install/)
 
 
@@ -48,7 +54,15 @@ Navigate to that directory.
 
 We're going to build our executable in release mode, and tell
 it to use musl to output a static binary that doesn't depend
-on any dynamically linked libraries. Here's the command:
+on any dynamically linked libraries.
+
+First we need to install the musl target for Rust:
+
+```bash
+rustup target install x86_64-unknown-linux-musl
+```
+
+Then we can build it:
 
 ```bash
 cargo build --release --target=x86_64-unknown-linux-musl
@@ -69,8 +83,8 @@ COPY target/x86_64-unknown-linux-musl/release/rust_docker_barebones /rust_docker
 ENTRYPOINT ["/rust_docker_barebones"]
 ```
 
-This starts with the most stripped-down Docker image, called
-"scratch". Maybe you've used the excellent tiny
+This starts with the most stripped-down Docker image, called the scratch image.
+Maybe you've used the excellent tiny
 [Alpine image](https://hub.docker.com/_/alpine/)?
 This is even
 more minimal than that. Basically the only thing the scratch image can do
