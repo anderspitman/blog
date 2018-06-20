@@ -1,5 +1,5 @@
 ---
-title: "Running a Barebones Rust Executable in a Docker Container"
+title: "Deploying a Static Rust App in a Barebones Docker Container"
 date: 2018-06-19T12:14:12-07:00
 draft: false
 ---
